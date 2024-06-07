@@ -19,7 +19,7 @@ export function Create() {
   }
 
   useEffect(() => {
-    console.log("Insering in DB...");
+    console.log("Inserting in DB...");
     insert();
   }, []);
 

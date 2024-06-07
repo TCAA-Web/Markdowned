@@ -15,7 +15,7 @@ export const Navigation = () => {
           <NavLink to="/delete">Delete</NavLink>
         </li>
         <li>
-          <NavLink to="/Home">Start</NavLink>
+          <NavLink to="/">Start</NavLink>
         </li>
       </ul>
     </nav>

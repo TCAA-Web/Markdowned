@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<WithAuth />}>
-            <Route index path="/home" element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="/create" element={<Create />} />
             <Route path="/delete" element={<Delete />} />
             <Route path="/update" element={<Update />} />
