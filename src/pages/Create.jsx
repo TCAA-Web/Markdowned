@@ -23,5 +23,9 @@ export function Create() {
     insert();
   }, []);
 
-  return <div>Create</div>;
+  return (
+    <div>
+      <h1>Create</h1>
+    </div>
+  );
 }

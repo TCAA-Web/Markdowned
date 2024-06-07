@@ -22,7 +22,15 @@ export const WithAuth = () => {
   }, []);
 
   if (!session) {
-    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
+    return (
+      <div style={{ width: "30vw", margin: "auto" }}>
+        <div style={{ marginBottom: "5vh" }}>
+          <h1>Welcome to Markdownee</h1>
+          <h3>Please sign in to continue</h3>
+        </div>
+        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+      </div>
+    );
   } else {
     return <Outlet />;
   }

@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
 import style from "./Navigation.module.scss";
+import supabase from "../../utils/supabase";
 
 export const Navigation = () => {
+  const logout = async () => {
+    let { error } = await supabase.auth.signOut();
+    console.log(error);
+  };
+
   return (
     <nav className={style.navbar}>
       <ul>
@@ -16,6 +22,9 @@ export const Navigation = () => {
         </li>
         <li>
           <NavLink to="/">Start</NavLink>
+        </li>
+        <li>
+          <button onClick={() => logout()}>Log out</button>
         </li>
       </ul>
     </nav>

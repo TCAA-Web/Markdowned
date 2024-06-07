@@ -11,5 +11,9 @@ export const Home = () => {
     getData();
   }, []);
 
-  return <div>Welcome</div>;
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
 };

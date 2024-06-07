@@ -2,13 +2,14 @@
 @use "mixins" as mixin;
 
 #root {
-  max-width: 1280px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+body {
+  padding: $space-md;
   background-color: $bg-color;
-  color: $font-color;
-  font-family: monospace;
 }
 
 * {

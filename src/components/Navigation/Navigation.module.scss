@@ -2,14 +2,23 @@
 @use "../../scss/variables" as *;
 
 .navbar {
-  height: 80px;
+  border-bottom: solid 1px $bg-lighter;
+  margin-bottom: 32px;
+  font-size: 1.1rem;
   ul {
-    @include mixin.Grid(4, 1, 8px);
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    gap: $space-sm;
+    justify-content: start;
     li {
+      display: flex;
+      align-items: center;
       text-decoration: none;
       list-style-type: none;
       a {
         color: $font-color;
+        text-decoration: none;
       }
     }
   }
