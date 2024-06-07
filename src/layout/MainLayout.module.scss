@@ -1,0 +1,7 @@
+@use "../scss/variables" as *;
+@use "../scss/mixins" as mixin;
+.mainLayout {
+  @include mixin.Grid(1, auto, 8px);
+  margin: auto;
+  max-width: 1268px;
+}

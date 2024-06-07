@@ -1,0 +1,17 @@
+@use "variables" as *;
+@use "mixins" as mixin;
+
+#root {
+  max-width: 1280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $bg-color;
+  color: $font-color;
+  font-family: monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

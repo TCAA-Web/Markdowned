@@ -1,0 +1,16 @@
+@use "../../scss/mixins" as mixin;
+@use "../../scss/variables" as *;
+
+.navbar {
+  height: 80px;
+  ul {
+    @include mixin.Grid(4, 1, 8px);
+    li {
+      text-decoration: none;
+      list-style-type: none;
+      a {
+        color: $font-color;
+      }
+    }
+  }
+}

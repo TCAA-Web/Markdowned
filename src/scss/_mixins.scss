@@ -1,0 +1,16 @@
+@mixin Grid($col, $row, $gap) {
+  display: grid;
+  grid-template-columns: repeat($col, 1fr);
+  grid-template-rows: repeat($row, 1fr);
+  gap: $gap;
+}
+
+@mixin align($align) {
+  align-items: $align;
+  align-content: $align;
+}
+
+@mixin justify($justify) {
+  justify-content: $justify;
+  justify-items: $justify;
+}
