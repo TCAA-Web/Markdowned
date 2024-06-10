@@ -1,0 +1,12 @@
+@use "../../scss/variables" as *;
+
+.cardStyle {
+  width: 20vw;
+  height: auto;
+  border: solid 1px $bg-lighter;
+  border-radius: 8px;
+  min-height: 40vh;
+  padding: $space-lg;
+  text-align: center;
+  margin: $space-md;
+}

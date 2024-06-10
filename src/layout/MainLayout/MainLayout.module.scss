@@ -1,5 +1,5 @@
-@use "../scss/variables" as *;
-@use "../scss/mixins" as mixin;
+@use "../../scss/variables" as *;
+@use "../../scss/mixins" as mixin;
 .mainLayout {
   max-width: 960px;
   min-height: 100vh;

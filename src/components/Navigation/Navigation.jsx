@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
 import style from "./Navigation.module.scss";
 import supabase from "../../utils/supabase";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useEffect } from "react";
+import { Burger } from "../Burger/Burger";
 
 export const Navigation = () => {
   const logout = async () => {

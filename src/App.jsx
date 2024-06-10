@@ -1,11 +1,11 @@
 import "./scss/main.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { MainLayout } from "./layout/MainLayout";
+import { MainLayout } from "./layout/MainLayout/MainLayout";
 import { Create } from "./pages/Create";
 import { Delete } from "./pages/Delete";
 import { Update } from "./pages/Update";
 import { Home } from "./pages/Home";
-import { WithAuth } from "./layout/WithAuth";
+import { WithAuth } from "./layout/WithAuth/WithAuth";
 
 function App() {
   return (

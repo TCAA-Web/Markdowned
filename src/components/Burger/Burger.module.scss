@@ -1,0 +1,65 @@
+// Variables needed to control the position as well as the size of the burgermenu
+// Change these values to change behaviour
+$bar-width: 33px;
+$bar-height: 2px;
+$bar-margin: 4px;
+$position: relative;
+$left: 0;
+$right: 0;
+$top: 0;
+$bottom: 0;
+$color: white;
+$border-radius: 8px;
+
+// Mixins used for control over look and feel as well as positions of spans
+@mixin spanBar($width, $height) {
+  display: block;
+  width: $width;
+  height: $height;
+  background-color: $color;
+  border-radius: $border-radius;
+  margin: $bar-margin;
+  padding: 0;
+  transition: ease 0.4s;
+}
+
+@mixin burgerMenu($position, $left, $right, $top, $down) {
+  display: block;
+  position: $position;
+  left: $left;
+  right: $right;
+  top: $top;
+  bottom: $bottom;
+  width: auto;
+  height: auto;
+}
+
+.burger_menu {
+  @include burgerMenu($position, $left, $right, $top, $bottom);
+  span {
+    @include spanBar($bar-width, $bar-height);
+  }
+}
+
+// Then transform position and rotation on all the children
+.burger_menu_collapsed {
+  @include burgerMenu($position, $left, $right, $top, $bottom);
+
+  // First span gets moved down equal to (its own height + margin) * 1, and rotated +45 deg.
+  span:nth-child(1) {
+    @include spanBar($bar-width, $bar-height);
+    transform: translateY(($bar-height + $bar-margin) * 1) rotate(45deg);
+  }
+
+  // Second span gets scaled to 0, thus zooming in and dissapearing.
+  span:nth-child(2) {
+    @include spanBar($bar-width, $bar-height);
+    transform: scale(0);
+  }
+
+  // Third span gets gets moved up equal to negative its own (height + margin) * 1 and rotated -45deg.
+  span:nth-child(3) {
+    @include spanBar($bar-width, $bar-height);
+    transform: translateY((-$bar-height - $bar-margin) * 1) rotate(-45deg);
+  }
+}
