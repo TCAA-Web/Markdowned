@@ -24,6 +24,7 @@ $border-radius: 8px;
 }
 
 @mixin burgerMenu($position, $left, $right, $top, $down) {
+  cursor: pointer;
   display: block;
   position: $position;
   left: $left;

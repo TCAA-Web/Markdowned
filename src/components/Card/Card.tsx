@@ -1,7 +1,12 @@
 import style from "../Card/Card.module.scss";
 import ReactMarkdown from "react-markdown";
 
-export const Card = ({ title, content }) => {
+interface CardInterface {
+  title: string;
+  content: string;
+}
+
+export const Card = ({ title, content }: CardInterface) => {
   return (
     <div className={style.cardStyle}>
       <header>

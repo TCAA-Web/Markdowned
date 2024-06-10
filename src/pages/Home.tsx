@@ -15,9 +15,11 @@ export const Home = () => {
   let mdContent = `__This is markdown__ \n Its all *fine* and  being rendered correctly with react-markdown`;
 
   return (
-    <div>
-      <h1>Home</h1>
+    <>
       <Card title={"Hello world"} content={mdContent} />
-    </div>
+      <Card title={"Hello world"} content={mdContent} />
+      <Card title={"Hello world"} content={mdContent} />
+      <Card title={"Hello world"} content={mdContent} />
+    </>
   );
 };

@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
+import React from "react";
 import style from "./Burger.module.scss";
 
-export const Burger = ({ setIsOpen, isOpen }) => {
+interface BurgerInterface {
+  setIsOpen: Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+}
+
+export const Burger = ({ setIsOpen, isOpen }: BurgerInterface) => {
   return (
     <div className={style.burger_container}>
       <div
