@@ -1,0 +1,92 @@
+@use "../../scss/mixins" as mixin;
+@use "../../scss/variables" as *;
+
+.navbar {
+  .burger_container {
+    top: 16px;
+    left: 8px;
+    position: fixed;
+    z-index: 5;
+  }
+
+  .dropdown {
+    transition: all 0.5s ease;
+    position: fixed;
+    left: 0px;
+    width: 228px;
+    height: 100vh;
+    background-color: $bg-color;
+    padding: 8px;
+    padding: $space-md;
+    border: solid 1px $bg-lighter;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: $space-sm;
+      margin-top: 64px;
+      justify-content: start;
+      li {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        list-style-type: none;
+        color: $font-color;
+        cursor: pointer;
+
+        a {
+          color: $font-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .hidden {
+    transition: all 0.5s ease;
+    position: fixed;
+    left: -200px;
+    width: 228px;
+    height: 100vh;
+    background-color: $bg-color;
+    padding: 8px;
+    padding: $space-md;
+    border: solid 1px $bg-lighter;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: $space-sm;
+      margin-top: 64px;
+      justify-content: start;
+      li {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        list-style-type: none;
+
+        a {
+          color: $font-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

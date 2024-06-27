@@ -1,25 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../utils/supabase";
 import { Card } from "../components/Card/Card";
 
 export const Home = () => {
+  const [dataArr, setDataArr] = useState<any>();
+
   async function getData() {
     const data = await supabase.from("files").select("*");
-    console.log(data);
+    setDataArr(data);
   }
 
   useEffect(() => {
     getData();
   }, []);
 
-  let mdContent = `__This is markdown__ \n Its all *fine* and  being rendered correctly with react-markdown`;
+  useEffect(() => {
+    console.log(dataArr);
+  }, [dataArr]);
 
   return (
     <>
-      <Card title={"Hello world"} content={mdContent} />
-      <Card title={"Hello world"} content={mdContent} />
-      <Card title={"Hello world"} content={mdContent} />
-      <Card title={"Hello world"} content={mdContent} />
+      {dataArr?.data?.map((item: any, index: number) => {
+        return (
+          <Card
+            key={item.title + index}
+            title={item.title}
+            content={item.data}
+          />
+        );
+      })}
     </>
   );
 };

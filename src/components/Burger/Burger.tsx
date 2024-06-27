@@ -9,7 +9,7 @@ interface BurgerInterface {
 
 export const Burger = ({ setIsOpen, isOpen }: BurgerInterface) => {
   return (
-    <div className={style.burger_container}>
+    <>
       <div
         id="burger"
         className={isOpen ? style.burger_menu_collapsed : style.burger_menu}
@@ -19,6 +19,6 @@ export const Burger = ({ setIsOpen, isOpen }: BurgerInterface) => {
         <span></span>
         <span></span>
       </div>
-    </div>
+    </>
   );
 };

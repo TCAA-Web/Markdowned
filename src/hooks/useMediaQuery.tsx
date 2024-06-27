@@ -9,7 +9,7 @@ export const useMediaQuery = () => {
       setWindowSize(windowWidth);
     });
     return () => {
-      removeEventListener("resize", listen);
+      removeEventListener("resize", listen!);
     };
   }, []);
 
