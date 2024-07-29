@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import supabase from "../utils/supabase";
-import { Card } from "../components/Card/Card";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Note } from "../components/Note/Note";
+import { Divider } from "@nextui-org/react";
 
 export const Home = () => {
   const [dataArr, setDataArr] = useState<any>();
@@ -22,11 +24,10 @@ export const Home = () => {
     <>
       {dataArr?.data?.map((item: any, index: number) => {
         return (
-          <Card
-            key={item.title + index}
-            title={item.title}
-            content={item.data}
-          />
+          <div key={item.id} className="pt-10">
+            <Note note={item} />
+            <Divider />
+          </div>
         );
       })}
     </>

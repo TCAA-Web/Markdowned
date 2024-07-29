@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
 import supabase from "../utils/supabase";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NoteDataInterface } from "../types/supabase";
-import { Card } from "../components/Card/Card";
+import { Note } from "../components/Note/Note";
 
 export const DisplayNote = () => {
   const { id } = useParams();
@@ -10,9 +10,19 @@ export const DisplayNote = () => {
 
   useEffect(() => {
     async function getNote() {
-      const data = await supabase.from("files").select("*").eq("id", id);
-      if (data && data.data) {
-        setNote(data.data[0]!);
+      try {
+        const { data, error } = await supabase
+          .from("files")
+          .select("*")
+          .eq("id", id);
+        if (data && !error) {
+          console.log("RAW DATA", data);
+          setNote(data[0]!);
+        } else if (error) {
+          console.error("ERROR: ", error);
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
     getNote();
@@ -22,5 +32,5 @@ export const DisplayNote = () => {
     console.log(note);
   }, [note]);
 
-  return note && <Card title={note.title} content={note?.data} />;
+  return note && <Note note={note} />;
 };

@@ -5,7 +5,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Outlet } from "react-router-dom";
 
 export const WithAuth = () => {
-  const [session, setSession] = useState();
+  const [session, setSession] = useState<any>();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {

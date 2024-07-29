@@ -1,20 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import style from "./Sidebar.module.scss";
 import supabase from "../../utils/supabase";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Burger } from "../Burger/Burger";
 import { routes } from "../../routes/routes";
-import { SidebarFolder } from "./SidebarFolder/SidebarFolder";
-import { SidebarItem } from "./SidebarItem/SidebarItem";
 import { sidebarContentInterface } from "../../types/sidebar";
-import { SidebarContext } from "../../context/SidebarContext";
+import { Accordion, AccordionItem, Card } from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 
 export const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [sidebarData, setSidebarData] = useState<
+    Array<sidebarContentInterface>
+  >([]);
 
-  const { getSidebarData, sidebarData, uniqueCategories } =
-    useContext(SidebarContext);
+  const [uniqueCategories, setUniqueCategories] = useState<Array<string>>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const logout = async () => {
     let { error } = await supabase.auth.signOut();
@@ -22,44 +23,88 @@ export const Sidebar = () => {
   };
 
   useEffect(() => {
-    getSidebarData();
+    console.log("Sidebar data", sidebarData);
+    console.log("Unique Categories", uniqueCategories);
+  }, [sidebarData, uniqueCategories]);
+
+  useEffect(() => {
+    async function getSidebarData() {
+      const data = await supabase.from("files").select("category, title, id");
+      let cleaned = data?.data
+        ?.filter((el, index) => {
+          if (
+            index === data.data.findIndex((o) => el.category === o.category)
+          ) {
+            return el;
+          }
+        })
+        .map((el) => el.category);
+      setSidebarData(data.data!);
+      if (cleaned) {
+        setUniqueCategories(cleaned);
+      } else {
+        setUniqueCategories(["No data yet"]);
+      }
+    }
+
+    if (sidebarData.length === 0) {
+      console.log("GETTING SIDEBAR DATA");
+
+      getSidebarData();
+    }
   }, []);
 
-  // TODO: Add category to supabase and create a system for automatically createing new folders from categories
-  /*   useEffect(() => {
-    console.log("categories : ", uniqueCategories);
-    console.log("sidebarData", sidebarData);
-  }, [uniqueCategories]); */
+  const navigate = useNavigate();
+
+  // TODO - START REPLACING EVERY UI PART WITH NEXT UI
 
   return (
     <nav className={style.navbar}>
-      <div className={style.burger_container}>
-        <Burger setIsOpen={setIsOpen} isOpen={isOpen} />
-      </div>
-      <div className={isOpen ? style.dropdown : style.hidden}>
-        <ul>
-          {routes.map((item) => {
-            return <NavLink to={item.url}>{item.title}</NavLink>;
-          })}
+      <Card className={isOpen ? style.dropdown : style.hidden}>
+        <div className={style.burger_container}>
+          <Burger setIsOpen={setIsOpen} isOpen={isOpen} />
+        </div>
+        {isOpen && (
+          <>
+            <Listbox
+              items={routes}
+              aria-label={"Menu"}
+              onAction={(key) => {
+                navigate(`${key}`);
+              }}
+            >
+              {(item) => <ListboxItem key={item.url}>{item.title}</ListboxItem>}
+            </Listbox>
 
-          {uniqueCategories?.map((uniqueCat: string, index: number) => {
-            return (
-              <SidebarFolder key={uniqueCat + index} title={uniqueCat}>
-                {sidebarData?.map((content: sidebarContentInterface) => {
-                  if (content.category == uniqueCat) {
-                    return (
-                      <SidebarItem title={content.title} id={content.id} />
-                    );
-                  }
-                })}
-              </SidebarFolder>
-            );
-          })}
-          <li>
+            <Accordion>
+              {uniqueCategories?.map((uniqueCat: string, index: number) => {
+                return (
+                  <AccordionItem title={uniqueCat} key={uniqueCat + index}>
+                    {sidebarData?.map((content: sidebarContentInterface) => {
+                      if (content.category == uniqueCat) {
+                        return (
+                          <Link
+                            aria-labelledby={content.title}
+                            key={content.id}
+                            style={{ width: "100%" }}
+                            isBlock
+                            showAnchorIcon
+                            color="foreground"
+                            href={`/note/${content.id}`}
+                          >
+                            {content.title}
+                          </Link>
+                        );
+                      }
+                    })}
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
             <button onClick={() => logout()}>Log out</button>
-          </li>
-        </ul>
-      </div>
+          </>
+        )}
+      </Card>
     </nav>
   );
 };

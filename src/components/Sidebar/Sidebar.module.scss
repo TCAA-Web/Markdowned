@@ -2,29 +2,33 @@
 @use "../../scss/variables" as *;
 
 .navbar {
+  display: flex;
+  z-index: 3000;
   .burger_container {
-    top: 16px;
-    left: 8px;
-    position: fixed;
-    z-index: 5;
+    align-self: end;
+    position: relative;
   }
 
   .dropdown {
+    z-index: 3000;
     transition: all 0.5s ease;
     position: fixed;
     left: 0px;
-    width: 228px;
+    width: 290px;
     height: 100vh;
-    background-color: $bg-color;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+
+    //background-color: $bg-color;
     padding: 8px;
     padding: $space-md;
-    border: solid 1px $bg-lighter;
-
+    //border: solid 1px $bg-lighter;
+    border-radius: 0;
     ul {
       display: flex;
       flex-direction: column;
       gap: $space-sm;
-      margin-top: 64px;
+      margin-top: 16px;
       justify-content: start;
       li {
         display: flex;
@@ -42,16 +46,18 @@
     }
   }
   .hidden {
+    z-index: 3000;
+
     transition: all 0.5s ease;
     position: fixed;
     left: -200px;
-    width: 228px;
+    width: 270px;
     height: 100vh;
-    background-color: $bg-color;
+    background-color: inherit;
     padding: 8px;
     padding: $space-md;
-    border: solid 1px $bg-lighter;
-
+    //border: solid 1px $bg-lighter;
+    border-radius: 0;
     ul {
       display: flex;
       flex-direction: column;
