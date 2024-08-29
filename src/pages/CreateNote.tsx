@@ -2,11 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import supabase from "../utils/supabase";
 import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
+import { HomeContext } from "../context/HomepageContext";
+import { useNavigate } from "react-router-dom";
+import { SidebarContext } from "../context/SidebarContext";
 
 export function CreateNote() {
   const [value, setValue] = useState<string | undefined>("Hello world!");
   const [title, setTitle] = useState<string | undefined>("");
   const [category, setCategory] = useState<string | undefined>("category");
+  const { getAllData } = useContext(HomeContext);
+  const { getSidebarData } = useContext(SidebarContext);
+  const navigate = useNavigate();
 
   const submitData = async () => {
     try {
@@ -14,6 +20,10 @@ export function CreateNote() {
         .from("files")
         .insert([{ data: value, title: title, category: category }]);
       console.log(data);
+      getAllData();
+      getSidebarData();
+      scrollTo(0, 0);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

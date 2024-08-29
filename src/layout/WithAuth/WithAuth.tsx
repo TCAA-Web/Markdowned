@@ -3,6 +3,7 @@ import supabase from "../../utils/supabase";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Outlet } from "react-router-dom";
+import style from "../MainLayout/MainLayout.module.scss";
 
 export const WithAuth = () => {
   const [session, setSession] = useState<any>();
@@ -23,13 +24,15 @@ export const WithAuth = () => {
 
   if (!session) {
     return (
-      <div style={{ width: "30vw", margin: "auto" }}>
-        <div style={{ marginBottom: "5vh" }}>
-          <h1>Welcome to Markdownee</h1>
-          <h3>Please sign in to continue</h3>
+      <main className={style.mainLayout}>
+        <div style={{ width: "30vw", margin: "auto" }}>
+          <div style={{ marginBottom: "5vh" }}>
+            <h1>Welcome to Markdownee</h1>
+            <h3>Please sign in to continue</h3>
+          </div>
+          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
         </div>
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
-      </div>
+      </main>
     );
   } else {
     return <Outlet />;

@@ -1,20 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import style from "./Sidebar.module.scss";
 import supabase from "../../utils/supabase";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Burger } from "../Burger/Burger";
 import { routes } from "../../routes/routes";
 import { sidebarContentInterface } from "../../types/sidebar";
 import { Accordion, AccordionItem, Card } from "@nextui-org/react";
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
+import { SidebarContext } from "../../context/SidebarContext";
 
 export const Sidebar = () => {
-  const [sidebarData, setSidebarData] = useState<
-    Array<sidebarContentInterface>
-  >([]);
+  const { sidebarData, uniqueCategories } = useContext(SidebarContext);
 
-  const [uniqueCategories, setUniqueCategories] = useState<Array<string>>([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const logout = async () => {
@@ -26,33 +24,6 @@ export const Sidebar = () => {
     console.log("Sidebar data", sidebarData);
     console.log("Unique Categories", uniqueCategories);
   }, [sidebarData, uniqueCategories]);
-
-  useEffect(() => {
-    async function getSidebarData() {
-      const data = await supabase.from("files").select("category, title, id");
-      let cleaned = data?.data
-        ?.filter((el, index) => {
-          if (
-            index === data.data.findIndex((o) => el.category === o.category)
-          ) {
-            return el;
-          }
-        })
-        .map((el) => el.category);
-      setSidebarData(data.data!);
-      if (cleaned) {
-        setUniqueCategories(cleaned);
-      } else {
-        setUniqueCategories(["No data yet"]);
-      }
-    }
-
-    if (sidebarData.length === 0) {
-      console.log("GETTING SIDEBAR DATA");
-
-      getSidebarData();
-    }
-  }, []);
 
   const navigate = useNavigate();
 
