@@ -12,8 +12,16 @@ import { CreateNote } from "./pages/CreateNote";
 import { DisplayNote } from "./pages/DisplayNote";
 import { EditNote } from "./pages/EditNote";
 import { NextUIProvider } from "@nextui-org/react";
+import ReactGA from "react-ga4";
+
 function App() {
   const navigate = useNavigate();
+
+  ReactGA.initialize([
+    {
+      trackingId: "G-FXDM5N6YFT",
+    },
+  ]);
 
   return (
     <main className="dark text-foreground bg-background">

@@ -3,28 +3,24 @@ import supabase from "../utils/supabase";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Note } from "../components/Note/Note";
 import { Divider } from "@nextui-org/react";
+import { getAllNotes } from "../queries/getAllNotes";
+import Reactlogo from "../assets/react.svg";
 
 export const Home = () => {
   const [dataArr, setDataArr] = useState<any>();
 
-  async function getData() {
-    const data = await supabase.from("files").select("*");
-    setDataArr(data);
-  }
+  const data = getAllNotes();
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(dataArr);
-  }, [dataArr]);
+  }, [dataArr]); */
 
   return (
     <>
-      {dataArr?.data?.map((item: any, index: number) => {
+      {data?.data?.map((item: any, index: number) => {
         return (
           <div key={item.id} className="pt-10">
+            <img src={Reactlogo} style={{ width: "100%;" }} />
             <Note note={item} />
             <Divider />
           </div>
