@@ -4,6 +4,7 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { CookieBanner } from "../../components/CookieBanner/CookieBanner";
 
 export const MainLayout = () => {
   const queryClient = new QueryClient({

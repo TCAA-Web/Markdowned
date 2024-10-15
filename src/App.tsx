@@ -11,19 +11,12 @@ import { Home } from "./pages/Home";
 import { CreateNote } from "./pages/CreateNote";
 import { DisplayNote } from "./pages/DisplayNote";
 import { EditNote } from "./pages/EditNote";
-import ReactGA from "react-ga4";
 import { NextUIProvider, Spinner } from "@nextui-org/react";
 import { SideBarContextProvider } from "./context/SidebarContext";
 import { HomeContextProvider } from "./context/HomepageContext";
 
 function App() {
   const navigate = useNavigate();
-
-  ReactGA.initialize([
-    {
-      trackingId: "G-FXDM5N6YFT",
-    },
-  ]);
 
   return (
     <NextUIProvider navigate={navigate}>

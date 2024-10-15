@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import supabase from "../../utils/supabase";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Outlet } from "react-router-dom";
 import style from "../MainLayout/MainLayout.module.scss";
+import { CookieBanner } from "../../components/CookieBanner/CookieBanner";
+import { HomeContext } from "../../context/HomepageContext";
+import ReactGA from "react-ga4";
 
 export const WithAuth = () => {
+  const { cookieAccept } = useContext(HomeContext);
   const [session, setSession] = useState<any>();
 
   useEffect(() => {
@@ -22,6 +26,15 @@ export const WithAuth = () => {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Tjek om cookieAccept er sat til true før Google Analytics starter
+  if (cookieAccept === true) {
+    ReactGA.initialize([
+      {
+        trackingId: "G-FXDM5N6YFT",
+      },
+    ]);
+  }
+
   if (!session) {
     return (
       <main className={style.mainLayout}>
@@ -32,6 +45,7 @@ export const WithAuth = () => {
           </div>
           <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
         </div>
+        <CookieBanner />
       </main>
     );
   } else {

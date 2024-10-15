@@ -12,7 +12,7 @@ export const Home = () => {
       {allData?.data?.map((item: any, index: number) => {
         return (
           <div key={item.id} className="pt-10">
-            <img src={Reactlogo} style={{ width: "100%;" }} />
+            <img src={Reactlogo} style={{ width: "100%" }} />
             <Note note={item} />
             <Divider />
           </div>
