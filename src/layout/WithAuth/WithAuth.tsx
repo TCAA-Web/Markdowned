@@ -30,7 +30,7 @@ export const WithAuth = () => {
   if (cookieAccept === true) {
     ReactGA.initialize([
       {
-        trackingId: "G-FXDM5N6YFT",
+        trackingId: "G-YTQRSQPW5B",
       },
     ]);
   }
