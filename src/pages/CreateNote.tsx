@@ -2,9 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import supabase from "../utils/supabase";
 import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
+
+import { Divider, Input, Spacer, Button } from "@nextui-org/react";
+import { Title } from "../components/Title/Title";
+
 import { HomeContext } from "../context/HomepageContext";
 import { useNavigate } from "react-router-dom";
 import { SidebarContext } from "../context/SidebarContext";
+
 
 export function CreateNote() {
   const [value, setValue] = useState<string | undefined>("Hello world!");
@@ -38,23 +43,28 @@ export function CreateNote() {
 
   return (
     <div>
-      <h1>Create</h1>
-      <input
+      <Title center={true} size={4} title={"Create new note"} />
+      <Spacer x={16} />
+      <Input
         type="text"
         placeholder="Title"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setTitle(e.target.value)
         }
-      ></input>
-      <input
+      ></Input>
+      <Spacer x={4} />
+      <Input
         type="text"
+        width={12}
         placeholder="Category"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setCategory(e.target.value);
         }}
-      ></input>
+      ></Input>
+      <Spacer x={1} />
+      <Divider />
       <MDEditor
-        height={"90vh"}
+        height={"70vh"}
         draggable="false"
         style={{ ...editorStyles }}
         value={value}
@@ -63,7 +73,8 @@ export function CreateNote() {
           rehypePlugins: [[rehypeSanitize]],
         }}
       />
-      <button onClick={() => submitData()}>Submit</button>
+      <Spacer x={4} />
+      <Button onClick={() => submitData()}>Submit</Button>
     </div>
   );
 }

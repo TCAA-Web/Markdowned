@@ -3,7 +3,7 @@
 .mainLayout {
   //max-width: 960px;
   min-height: 100vh;
-  width: 70%;
+  //width: 70%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -12,9 +12,9 @@
   //border: solid 1px $bg-lighter;
   //border-radius: 16px;
   margin: auto;
-  //margin-top: $space-md;
+  margin-top: $space-md;
   //margin-bottom: $space-md;
-  //text-align: center;
+  text-align: center;
   padding: $space-md;
   align-items: center;
   justify-content: center;
